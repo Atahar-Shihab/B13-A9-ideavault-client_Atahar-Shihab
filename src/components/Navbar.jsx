@@ -130,16 +130,48 @@ export default function Navbar() {
                 )}
               </div>
             </label>
-            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow-xl menu menu-sm dropdown-content bg-base-100 rounded-2xl w-56 border border-base-200">
-              <li className="px-3 py-2">
-                <span className="font-semibold text-sm block truncate">{user.name}</span>
-                <span className="text-xs text-base-content/50 block truncate">{user.email}</span>
+            <ul tabIndex={0} className="mt-3 z-[1] p-0 shadow-2xl dropdown-content bg-base-100 rounded-2xl w-64 border border-base-200 overflow-hidden">
+              {/* Gradient profile header */}
+              <li className="menu-none">
+                <div className="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 px-4 py-4 flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full ring-2 ring-white/50 overflow-hidden shrink-0">
+                    {(user.photoURL || user.image) ? (
+                      <img src={user.photoURL || user.image} alt={user.name} referrerPolicy="no-referrer" className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full bg-white/25 flex items-center justify-center text-white text-lg font-bold">
+                        {user.name?.[0]?.toUpperCase()}
+                      </div>
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="font-bold text-sm text-white truncate">{user.name}</div>
+                    <div className="text-xs text-white/75 truncate">{user.email}</div>
+                  </div>
+                </div>
               </li>
-              <div className="divider my-1"></div>
-              <li><Link href="/profile" className="rounded-xl">👤 Profile Management</Link></li>
-              <li><Link href="/bookmarks" className="rounded-xl">🔖 My Bookmarks</Link></li>
-              <div className="divider my-1"></div>
-              <li><button onClick={handleLogout} className="rounded-xl text-error">Logout</button></li>
+
+              {/* Menu items */}
+              <div className="p-2 menu menu-sm">
+                <li>
+                  <Link href="/profile" className="rounded-xl flex items-center gap-3 py-2.5">
+                    <span className="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center text-base">👤</span>
+                    <span className="font-medium">Profile Management</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/bookmarks" className="rounded-xl flex items-center gap-3 py-2.5">
+                    <span className="w-8 h-8 rounded-lg bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center text-base">🔖</span>
+                    <span className="font-medium">My Bookmarks</span>
+                  </Link>
+                </li>
+                <div className="h-px bg-base-200 my-1.5 mx-2" />
+                <li>
+                  <button onClick={handleLogout} className="rounded-xl flex items-center gap-3 py-2.5 text-error hover:bg-error/10">
+                    <span className="w-8 h-8 rounded-lg bg-error/10 flex items-center justify-center text-base">🚪</span>
+                    <span className="font-medium">Logout</span>
+                  </button>
+                </li>
+              </div>
             </ul>
           </div>
         ) : (

@@ -134,12 +134,21 @@ function Content() {
 
       {deleteTarget && (
         <div className="modal modal-open">
-          <div className="modal-box">
-            <h3 className="font-bold text-lg">Confirm Delete</h3>
-            <p className="py-4">Are you sure you want to delete <strong>"{deleteTarget.title}"</strong>?</p>
-            <div className="modal-action">
-              <button className="btn btn-ghost" onClick={() => setDeleteTarget(null)}>Cancel</button>
-              <button className="btn btn-error" onClick={handleDelete}>Delete</button>
+          <div className="modal-box rounded-3xl text-center">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-rose-500 to-red-500 flex items-center justify-center text-3xl shadow-lg shadow-rose-500/30">
+              🗑️
+            </div>
+            <h3 className="font-extrabold text-xl mb-2">Delete this idea?</h3>
+            <p className="text-base-content/60 text-sm mb-1">
+              You're about to permanently delete
+            </p>
+            <p className="font-bold mb-6">"{deleteTarget.title}"</p>
+            <p className="text-xs text-base-content/40 mb-6">This action cannot be undone. All comments will also be removed.</p>
+            <div className="flex gap-3 justify-center">
+              <button className="btn btn-ghost rounded-xl px-8" onClick={() => setDeleteTarget(null)}>Cancel</button>
+              <button className="btn bg-gradient-to-r from-rose-500 to-red-500 text-white border-0 rounded-xl px-8 shadow-lg shadow-rose-500/30 hover:shadow-xl" onClick={handleDelete}>
+                Delete
+              </button>
             </div>
           </div>
           <div className="modal-backdrop" onClick={() => setDeleteTarget(null)} />
@@ -148,22 +157,74 @@ function Content() {
 
       {editTarget && (
         <div className="modal modal-open">
-          <div className="modal-box max-w-2xl">
-            <h3 className="font-bold text-lg mb-4">Edit Idea</h3>
-            <div className="space-y-3">
-              <input value={editForm.title} onChange={(e) => setEditForm(p => ({ ...p, title: e.target.value }))} placeholder="Title" className="input input-bordered w-full" />
-              <input value={editForm.shortDescription} onChange={(e) => setEditForm(p => ({ ...p, shortDescription: e.target.value }))} placeholder="Short Description" className="input input-bordered w-full" />
-              <textarea value={editForm.detailedDescription} onChange={(e) => setEditForm(p => ({ ...p, detailedDescription: e.target.value }))} rows={3} placeholder="Detailed Description" className="textarea textarea-bordered w-full" />
-              <select value={editForm.category} onChange={(e) => setEditForm(p => ({ ...p, category: e.target.value }))} className="select select-bordered w-full">
-                {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
-              </select>
-              <input value={editForm.targetAudience} onChange={(e) => setEditForm(p => ({ ...p, targetAudience: e.target.value }))} placeholder="Target Audience" className="input input-bordered w-full" />
-              <textarea value={editForm.problemStatement} onChange={(e) => setEditForm(p => ({ ...p, problemStatement: e.target.value }))} rows={2} placeholder="Problem Statement" className="textarea textarea-bordered w-full" />
-              <textarea value={editForm.proposedSolution} onChange={(e) => setEditForm(p => ({ ...p, proposedSolution: e.target.value }))} rows={2} placeholder="Proposed Solution" className="textarea textarea-bordered w-full" />
+          <div className="modal-box max-w-2xl rounded-3xl p-0 overflow-hidden">
+            {/* Gradient header */}
+            <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-6 py-5 flex items-center gap-3 sticky top-0 z-10">
+              <div className="w-11 h-11 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center text-2xl shadow-md">✏️</div>
+              <div>
+                <h3 className="font-extrabold text-lg text-white">Edit Idea</h3>
+                <p className="text-white/75 text-xs">Update your startup idea details</p>
+              </div>
             </div>
-            <div className="modal-action">
-              <button className="btn btn-ghost" onClick={() => setEditTarget(null)}>Cancel</button>
-              <button className="btn btn-primary" disabled={saving} onClick={handleEditSave}>
+
+            {/* Scrollable body */}
+            <div className="p-6 space-y-5 max-h-[60vh] overflow-y-auto">
+              <div className="field-stack">
+                <label>Idea Title</label>
+                <input value={editForm.title} onChange={(e) => setEditForm(p => ({ ...p, title: e.target.value }))} placeholder="Idea title" className="input input-bordered rounded-xl w-full focus:input-primary" />
+              </div>
+              <div className="field-stack">
+                <label>Short Description</label>
+                <input value={editForm.shortDescription} onChange={(e) => setEditForm(p => ({ ...p, shortDescription: e.target.value }))} placeholder="One-liner about your idea" className="input input-bordered rounded-xl w-full focus:input-primary" />
+              </div>
+              <div className="field-stack">
+                <label>Detailed Description</label>
+                <textarea value={editForm.detailedDescription} onChange={(e) => setEditForm(p => ({ ...p, detailedDescription: e.target.value }))} rows={3} placeholder="Explain your idea in detail..." className="textarea textarea-bordered rounded-xl w-full focus:textarea-primary" />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div className="field-stack">
+                  <label>Category</label>
+                  <select value={editForm.category} onChange={(e) => setEditForm(p => ({ ...p, category: e.target.value }))} className="select select-bordered rounded-xl w-full focus:select-primary">
+                    {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
+                  </select>
+                </div>
+                <div className="field-stack">
+                  <label>Tags <span className="text-base-content/40 font-normal">(comma separated)</span></label>
+                  <input value={editForm.tags} onChange={(e) => setEditForm(p => ({ ...p, tags: e.target.value }))} placeholder="startup, ai, mobile" className="input input-bordered rounded-xl w-full focus:input-primary" />
+                </div>
+              </div>
+              <div className="field-stack">
+                <label>Image URL <span className="text-base-content/40 font-normal">(optional)</span></label>
+                <input value={editForm.imageURL} onChange={(e) => setEditForm(p => ({ ...p, imageURL: e.target.value }))} placeholder="https://..." className="input input-bordered rounded-xl w-full focus:input-primary" />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div className="field-stack">
+                  <label>Target Audience</label>
+                  <input value={editForm.targetAudience} onChange={(e) => setEditForm(p => ({ ...p, targetAudience: e.target.value }))} placeholder="e.g. Freelancers, Students" className="input input-bordered rounded-xl w-full focus:input-primary" />
+                </div>
+                <div className="field-stack">
+                  <label>Estimated Budget <span className="text-base-content/40 font-normal">(optional)</span></label>
+                  <input value={editForm.estimatedBudget} onChange={(e) => setEditForm(p => ({ ...p, estimatedBudget: e.target.value }))} placeholder="e.g. $5,000" className="input input-bordered rounded-xl w-full focus:input-primary" />
+                </div>
+              </div>
+              <div className="field-stack">
+                <label>Problem Statement</label>
+                <textarea value={editForm.problemStatement} onChange={(e) => setEditForm(p => ({ ...p, problemStatement: e.target.value }))} rows={2} placeholder="What problem does this solve?" className="textarea textarea-bordered rounded-xl w-full focus:textarea-primary" />
+              </div>
+              <div className="field-stack">
+                <label>Proposed Solution</label>
+                <textarea value={editForm.proposedSolution} onChange={(e) => setEditForm(p => ({ ...p, proposedSolution: e.target.value }))} rows={2} placeholder="How will your idea solve it?" className="textarea textarea-bordered rounded-xl w-full focus:textarea-primary" />
+              </div>
+            </div>
+
+            {/* Sticky footer */}
+            <div className="px-6 py-4 border-t border-base-200 flex justify-end gap-2 bg-base-100">
+              <button className="btn btn-ghost rounded-xl" onClick={() => setEditTarget(null)}>Cancel</button>
+              <button
+                className="btn rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-0 shadow-lg shadow-indigo-500/30 hover:shadow-xl px-8"
+                disabled={saving}
+                onClick={handleEditSave}
+              >
                 {saving ? <span className="loading loading-spinner loading-sm" /> : "Save Changes"}
               </button>
             </div>
