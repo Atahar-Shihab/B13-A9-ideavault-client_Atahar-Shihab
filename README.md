@@ -13,30 +13,54 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
 
-### 🔗 [**Live Demo**](https://b13-a9-ideavault-client-atahar-shih-tau.vercel.app) &nbsp;•&nbsp; [Server Repo](https://github.com/Atahar-Shihab/B13-A9-ideavault-server_Atahar-Shihab)
+<br/>
+
+### 🌐 [**Visit Live Site**](https://b13-a9-ideavault-client-atahar-shih-tau.vercel.app)
+
+[Live Demo](https://b13-a9-ideavault-client-atahar-shih-tau.vercel.app) &nbsp;•&nbsp; [Server Repository](https://github.com/Atahar-Shihab/B13-A9-ideavault-server_Atahar-Shihab) &nbsp;•&nbsp; [Report Bug](https://github.com/Atahar-Shihab/B13-A9-ideavault-client_Atahar-Shihab/issues)
 
 </div>
 
 ---
 
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [Key Features](#-key-features)
+- [Tech Stack](#️-tech-stack)
+- [Screenshots](#-screenshots)
+- [Getting Started](#-getting-started)
+- [Environment Variables](#-environment-variables)
+- [Project Structure](#️-project-structure)
+- [API Reference](#-api-reference)
+- [Author](#-author)
+
+---
+
 ## 📖 Overview
 
-**IdeaVault** is a full-stack web platform where entrepreneurs and innovators can **share** startup ideas, **discover** trending concepts, and **engage** through likes, bookmarks, and threaded discussion. Instead of booking or scheduling, the platform focuses on **idea validation and community engagement** — helping creators refine their concepts collectively.
+**IdeaVault** is a full-stack web platform where entrepreneurs and innovators can **share** startup ideas, **discover** trending concepts, and **engage** through likes, bookmarks, and threaded discussion. Rather than booking or scheduling, the platform focuses on **idea validation and community engagement** — helping creators refine their concepts collectively.
 
-Built end-to-end with **Next.js 15 App Router** (frontend + backend API routes in one project), secured with **Better Auth**, and powered by **MongoDB**.
+Built end-to-end with **Next.js 15 App Router** (frontend **and** backend API routes in a single project), authenticated with **Better Auth**, and powered by **MongoDB Atlas**.
+
+> 🎯 **Built for:** Programming Hero Assignment 9 (CAT_01) — featuring Next.js, Node.js, MongoDB, Better Auth, full CRUD, JWT-style sessions, protected routes, search/filter/sort, and a dark/light theme.
 
 ---
 
 ## ✨ Key Features
 
-- 🔐 **Dual Authentication** — Email/password (with strong validation) **and** Google OAuth, powered by Better Auth with secure session cookies that persist across reloads
-- 💡 **Full CRUD on Ideas** — Create, read, update (modal), and delete (confirmation modal) startup ideas with 10 detailed fields, all ownership-protected on the server
-- 💬 **Threaded Comment System** — Add, edit, and delete your own comments with author avatars and timestamps in real time
-- 🔥 **Smart Trending Algorithm** — MongoDB `$aggregate` ranks ideas by `(likes × 3) + (comments × 2) + recency boost`, surfacing the hottest 6 via `$limit`
-- ❤️ **Likes & 🔖 Bookmarks** — Heart ideas you love and save ideas to a personal bookmarks page for later
-- 🔎 **Powerful Search & Filter** — Case-insensitive title search (`$regex`), category filtering, and date-range filtering (`$gte` / `$lte`)
-- 🌗 **Dark / Light Theme** — One-click global toggle, persisted in localStorage with zero flash of unstyled content
-- 📱 **Fully Responsive** — Pixel-perfect on mobile, tablet, and desktop with a premium, animated UI
+| | Feature | Description |
+|---|---|---|
+| 🔐 | **Dual Authentication** | Email/password (with strong validation) **and** Google OAuth via Better Auth, with secure session cookies that persist across reloads |
+| 💡 | **Full CRUD on Ideas** | Create, read, update (modal), delete (confirmation modal) — 10 detailed fields, all ownership-protected server-side |
+| 💬 | **Threaded Comments** | Add, edit, and delete your own comments with author avatars and timestamps |
+| 🔥 | **Smart Trending Algorithm** | MongoDB `$aggregate` ranks by `(likes × 3) + (comments × 2) + recency boost`, top 6 via `$limit` |
+| ❤️ | **Likes & Bookmarks** | Heart ideas and save favourites to a personal bookmarks page |
+| 🔎 | **Search, Filter & Sort** | Case-insensitive title search (`$regex`), category filter, and date-range filter (`$gte` / `$lte`) |
+| 🛡️ | **Protected Routes** | Add Idea, My Ideas, My Interactions, Bookmarks & Profile require auth; reload never logs you out |
+| 🌗 | **Dark / Light Theme** | One-click global toggle, persisted in localStorage, zero flash on load |
+| 📱 | **Fully Responsive** | Pixel-perfect across mobile, tablet, and desktop with a premium animated UI |
+| 🔔 | **Toasts Everywhere** | Every CRUD action and interaction shows a toast — no native browser alerts |
 
 ---
 
@@ -54,45 +78,38 @@ Built end-to-end with **Next.js 15 App Router** (frontend + backend API routes i
 
 ---
 
-## 🗂️ Project Structure
 
-```
-src/
-├── app/
-│   ├── api/                  # Backend Route Handlers (the "server")
-│   │   ├── auth/[...all]/     # Better Auth catch-all
-│   │   ├── ideas/            # Ideas CRUD + trending + likes
-│   │   ├── comments/         # Comments CRUD
-│   │   ├── bookmarks/        # Bookmark toggle + list
-│   │   ├── interactions/     # User's commented ideas
-│   │   └── user/profile/     # Profile update
-│   ├── ideas/[id]/           # Idea details (private)
-│   ├── add-idea/             # Submit idea (private)
-│   ├── my-ideas/             # Dashboard (private)
-│   ├── login/ • register/    # Auth pages
-│   ├── layout.js             # Root layout + Navbar + Footer
-│   └── page.jsx              # Home page
-├── components/               # Navbar, Footer, IdeaCard, Marquee, etc.
-└── lib/                      # auth.js, mongodb.js, session.js
-```
-
----
 
 ## 🚀 Getting Started
 
+### Prerequisites
+- Node.js 18+
+- A MongoDB Atlas connection string
+- A Google OAuth Client (ID + Secret)
+
+### Installation
+
 ```bash
-# 1. Install dependencies
+# 1. Clone the repository
+git clone https://github.com/Atahar-Shihab/B13-A9-ideavault-client_Atahar-Shihab.git
+cd B13-A9-ideavault-client_Atahar-Shihab
+
+# 2. Install dependencies
 npm install
 
-# 2. Create .env.local (see below)
+# 3. Create .env.local (see below)
 
-# 3. Run the dev server
+# 4. Start the dev server
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) 🎉
 
-### Environment Variables (`.env.local`)
+---
+
+## 🔑 Environment Variables
+
+Create a `.env.local` file in the root:
 
 ```env
 MONGODB_URI=your_mongodb_connection_string
@@ -103,30 +120,73 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
+> ⚠️ For production, set `BETTER_AUTH_URL` and `NEXT_PUBLIC_APP_URL` to your deployed domain, and add the production callback URL (`/api/auth/callback/google`) in Google Cloud Console.
+
 ---
 
-## 📡 API Routes
+## 🗂️ Project Structure
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `POST` | `/api/auth/*` | Better Auth (login, register, Google, session) |
-| `GET / POST` | `/api/ideas` | List (search/filter) · Create idea |
-| `GET / PUT / DELETE` | `/api/ideas/[id]` | Single idea · Update · Delete |
-| `GET` | `/api/ideas/trending` | Top 6 trending (`$aggregate` + `$limit`) |
-| `POST` | `/api/ideas/[id]/like` | Toggle like |
-| `GET / POST` | `/api/comments` | Create comment |
-| `GET` | `/api/comments/[ideaId]` | Comments for an idea |
-| `PUT / DELETE` | `/api/comments/edit/[id]` | Edit / delete own comment |
-| `GET / POST` | `/api/bookmarks` | List / toggle bookmarks |
-| `GET` | `/api/interactions` | Ideas the user commented on |
-| `PATCH` | `/api/user/profile` | Update profile |
+```
+src/
+├── app/
+│   ├── api/                   # Backend Route Handlers (the "server")
+│   │   ├── auth/[...all]/      # Better Auth catch-all
+│   │   ├── ideas/             # Ideas CRUD + trending + likes
+│   │   ├── comments/          # Comments CRUD
+│   │   ├── bookmarks/         # Bookmark toggle + list + check
+│   │   ├── interactions/      # User's commented ideas
+│   │   └── user/profile/      # Profile update
+│   ├── ideas/[id]/            # Idea details (private)
+│   ├── add-idea/              # Submit idea (private)
+│   ├── my-ideas/              # Dashboard with edit/delete modals (private)
+│   ├── my-interactions/       # Commented ideas (private)
+│   ├── bookmarks/             # Saved ideas (private)
+│   ├── profile/               # Profile management (private)
+│   ├── login/  •  register/   # Auth pages
+│   ├── layout.js              # Root layout + Navbar + Footer
+│   ├── page.jsx               # Home page
+│   └── not-found.jsx          # Custom 404
+├── components/                # Navbar, Footer, IdeaCard, Marquee, PrivateGuard…
+└── lib/                       # auth.js, auth-client.js, mongodb.js, session.js
+```
+
+---
+
+## 📡 API Reference
+
+| Method | Endpoint | Auth | Description |
+|---|---|:---:|---|
+| `*` | `/api/auth/*` | — | Better Auth (login, register, Google, session) |
+| `GET` | `/api/ideas` | — | List ideas with search / category / date filters |
+| `POST` | `/api/ideas` | ✅ | Create a new idea |
+| `GET` | `/api/ideas/trending` | — | Top 6 trending (`$aggregate` + `$limit`) |
+| `GET` | `/api/ideas/my` | ✅ | Current user's ideas |
+| `GET` | `/api/ideas/[id]` | ✅ | Single idea details |
+| `PUT` | `/api/ideas/[id]` | ✅ | Update (author only) |
+| `DELETE` | `/api/ideas/[id]` | ✅ | Delete (author only) |
+| `POST` | `/api/ideas/[id]/like` | ✅ | Toggle like |
+| `POST` | `/api/comments` | ✅ | Add a comment |
+| `GET` | `/api/comments/[ideaId]` | — | Get comments for an idea |
+| `PUT/DELETE` | `/api/comments/edit/[id]` | ✅ | Edit / delete own comment |
+| `GET/POST` | `/api/bookmarks` | ✅ | List / toggle bookmarks |
+| `GET` | `/api/bookmarks/check` | ✅ | Bookmarked idea IDs |
+| `GET` | `/api/interactions` | ✅ | Ideas the user commented on |
+| `PATCH` | `/api/user/profile` | ✅ | Update profile |
+
+---
+
+## 👤 Author
+
+**Atahar Shihab**
+
+[![GitHub](https://img.shields.io/badge/GitHub-Atahar--Shihab-181717?style=flat&logo=github)](https://github.com/Atahar-Shihab)
 
 ---
 
 <div align="center">
 
-Made with 💜 by **Atahar Shihab**
+### Built with 💜 using Next.js, MongoDB & Better Auth
 
-⭐ Star this repo if you found it helpful!
+⭐ **Star this repo if you found it helpful!**
 
 </div>
