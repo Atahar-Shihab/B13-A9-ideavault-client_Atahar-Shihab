@@ -1,6 +1,6 @@
 # IdeaVault — Startup Idea Sharing Platform
 
-**Live Site:** https://your-live-url.vercel.app
+**Live Site:** https://b13-a9-ideavault-client-atahar-shih-tau.vercel.app
 
 A modern community platform built with **Next.js 15** where entrepreneurs share, discover, and validate startup ideas through likes, bookmarks, and threaded discussion.
 
